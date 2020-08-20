@@ -1,4 +1,4 @@
-# ramsey/php-library-development Changelog
+# ramsey/devtools Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -21,14 +21,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Security
 
 
-## [1.0.0] - YYYY-MM-DD
+## [1.0.0] - 2020-08-27
 
 ### Added
 
-* Feature A description
-* Feature B description
-* Feature C description
+* create a Composer plugin for development tools
 
 
-[Unreleased]: https://github.com/ramsey/php-library-development/compare/1.0.0...HEAD
-[1.0.0]: https://github.com/ramsey/php-library-development/commits/1.0.0
+[Unreleased]: https://github.com/ramsey/devtools/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/ramsey/devtools/commits/1.0.0

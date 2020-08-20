@@ -1,6 +1,11 @@
 name: main
 
-on: [push, pull_request]
+on:
+    push:
+        branches:
+            - master
+        tags:
+    pull_request:
 
 jobs:
 
@@ -52,18 +57,10 @@ jobs:
 
             - name: Analyze & test
               run: |
-                  composer br:lint
-                  composer br:analyze
-                  composer br:test:coverage:ci -- --coverage-text
+                  bin/devtools lint
+                  bin/devtools analyze:phpstan
+                  bin/devtools analyze:psalm -- --shepherd
+                  bin/devtools test:coverage:ci -- --coverage-text
 
-            - name: Publish code coverage
-              uses: paambaati/codeclimate-action@v2.6.0 # https://github.com/paambaati/codeclimate-action
-              with:
-                  # Action requires coverageCommand, but we ran it in the previous step.
-                  coverageCommand: echo "Sending coverage to Code Climate"
-                  coverageLocations: ${{github.workspace}}/build/logs/clover.xml:clover
-              env:
-                  CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-              continue-on-error: true
-            - name: Codecov
+            - name: Publish code coverage to Codecov
               uses: codecov/codecov-action@v1

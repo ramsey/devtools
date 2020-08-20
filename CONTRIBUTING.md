@@ -12,7 +12,7 @@ this project and its community, you are expected to uphold this code.
 
 You can find help and discussion in the following places:
 
-* GitHub Issues: <https://github.com/ramsey/php-library-development/issues>
+* GitHub Issues: <https://github.com/ramsey/devtools/issues>
 
 
 ## Reporting Bugs
@@ -56,11 +56,11 @@ When you do begin working on your feature, here are some guidelines to consider:
   We will use this description to update the CHANGELOG. If there is no
   description or it does not adequately describe your feature, we may ask you
   to update the description.
-* ramsey/php-library-development follows the **[PSR-12 coding standard][psr-12]**. Please
+* ramsey/devtools follows the **[PSR-12 coding standard][psr-12]**. Please
   ensure your code does, too.
 * Please **write tests** for any new features you add.
 * Please **ensure that tests pass** before submitting your pull request.
-  ramsey/php-library-development has Travis CI automatically running tests for pull requests.
+  ramsey/devtools has Travis CI automatically running tests for pull requests.
   However, running the tests locally will help save time.
 * **Use topic/feature branches.** Please do not ask to pull from your master
   branch.
@@ -83,13 +83,13 @@ To run all the tests and coding standards checks, execute the following from the
 command line, while in the project root directory:
 
 ```
-composer br:test:all
+composer test
 ```
 
 
-[github]: https://github.com/ramsey/php-library-development
-[issues]: https://github.com/ramsey/php-library-development/issues
-[pull requests]: https://github.com/ramsey/php-library-development/pulls
+[github]: https://github.com/ramsey/devtools
+[issues]: https://github.com/ramsey/devtools/issues
+[pull requests]: https://github.com/ramsey/devtools/pulls
 [psr-12]: https://www.php-fig.org/psr/psr-12/
 [gh-flow]: https://guides.github.com/introduction/flow/
 [git-commit]: https://chris.beams.io/posts/git-commit/

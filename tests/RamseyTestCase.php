@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ramsey\Test\Dev;
+namespace Ramsey\Test\Dev\Tools;
 
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * A base test case for common test functionality
  */
-class RamseyTestCase extends TestCase
+abstract class RamseyTestCase extends TestCase
 {
     use MockeryPHPUnitIntegration;
 

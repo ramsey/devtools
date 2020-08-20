@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This file is part of ramsey/php-library-development
+ * This file is part of ramsey/devtools
  *
- * ramsey/php-library-development is open source software: you can distribute
+ * ramsey/devtools is open source software: you can distribute
  * it and/or modify it under the terms of the MIT License
  * (the "License"). You may not use this file except in
  * compliance with the License.
@@ -20,18 +20,24 @@
 
 declare(strict_types=1);
 
-namespace Ramsey\Dev;
+namespace Ramsey\Dev\Tools\Process;
+
+use ReflectionException;
 
 /**
- * An example class to act as a starting point for developing your library
+ * Factory to create a Process instance for running commands
+ *
+ * @internal
  */
-class Example
+class ProcessFactory
 {
     /**
-     * Returns a greeting statement using the provided name
+     * @param string[] $command
+     *
+     * @throws ReflectionException
      */
-    public function greet(string $name = 'World'): string
+    public function factory(array $command, ?string $cwd = null): Process
     {
-        return "Hello, {$name}!";
+        return new Process($command, $cwd);
     }
 }
