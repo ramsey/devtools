@@ -16,7 +16,6 @@ class AnalyzePsalmCommandTest extends ProcessCommandTestCase
             '/path/to/bin-dir/psalm',
             '--diff',
             '--diff-methods',
-            '--show-info=true',
             '--long-progress',
             '--stats',
             '--bar',

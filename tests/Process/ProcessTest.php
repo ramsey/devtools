@@ -6,9 +6,9 @@ namespace Ramsey\Test\Dev\Tools\Process;
 
 use Mockery\MockInterface;
 use Ramsey\Dev\Tools\Process\Process;
-use Ramsey\Test\Dev\Tools\RamseyTestCase;
+use Ramsey\Dev\Tools\TestCase;
 
-class ProcessTest extends RamseyTestCase
+class ProcessTest extends TestCase
 {
     public function testUseCorrectCommand(): void
     {

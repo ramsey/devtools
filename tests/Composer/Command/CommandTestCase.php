@@ -9,11 +9,11 @@ use Composer\Config;
 use Mockery\MockInterface;
 use Ramsey\Dev\Tools\Composer\Command\BaseCommand;
 use Ramsey\Dev\Tools\Process\ProcessFactory;
-use Ramsey\Test\Dev\Tools\RamseyTestCase;
+use Ramsey\Dev\Tools\TestCase;
 
 use const DIRECTORY_SEPARATOR;
 
-abstract class CommandTestCase extends RamseyTestCase
+abstract class CommandTestCase extends TestCase
 {
     /** @var class-string */
     protected string $commandClass;

@@ -13,11 +13,11 @@ use Mockery\MockInterface;
 use Ramsey\Dev\Tools\Composer\Command\BaseCommand;
 use Ramsey\Dev\Tools\Composer\Command\CaptainHookInstallCommand;
 use Ramsey\Dev\Tools\Composer\DevToolsPlugin;
-use Ramsey\Test\Dev\Tools\RamseyTestCase;
+use Ramsey\Dev\Tools\TestCase;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DevToolsPluginTest extends RamseyTestCase
+class DevToolsPluginTest extends TestCase
 {
     public function testGetSubscribedEvents(): void
     {
