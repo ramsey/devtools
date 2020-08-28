@@ -28,11 +28,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_merge;
 
-class TestCommand extends ProcessCommand
+class TestUnitCommand extends ProcessCommand
 {
     public function getBaseName(): string
     {
-        return 'test';
+        return 'test:unit';
     }
 
     /**
@@ -55,7 +55,7 @@ class TestCommand extends ProcessCommand
     protected function configure(): void
     {
         $this
-            ->setDescription('Runs the full unit test suite.')
+            ->setDescription('Runs the unit test suite.')
             ->setDefinition([
                 new InputArgument('args', InputArgument::IS_ARRAY | InputArgument::OPTIONAL, ''),
             ]);

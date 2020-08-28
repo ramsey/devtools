@@ -41,9 +41,9 @@ use Ramsey\Dev\Tools\Composer\Command\LintCommand;
 use Ramsey\Dev\Tools\Composer\Command\LintFixCommand;
 use Ramsey\Dev\Tools\Composer\Command\PreCommitCommand;
 use Ramsey\Dev\Tools\Composer\Command\TestAllCommand;
-use Ramsey\Dev\Tools\Composer\Command\TestCommand;
 use Ramsey\Dev\Tools\Composer\Command\TestCoverageCiCommand;
 use Ramsey\Dev\Tools\Composer\Command\TestCoverageHtmlCommand;
+use Ramsey\Dev\Tools\Composer\Command\TestUnitCommand;
 use Ramsey\Dev\Tools\Process\ProcessFactory;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -121,7 +121,7 @@ class DevToolsPlugin implements
             new LintFixCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
             new PreCommitCommand(self::$composer, $prefix),
             new TestAllCommand(self::$composer, $prefix),
-            new TestCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
+            new TestUnitCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
             new TestCoverageCiCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
             new TestCoverageHtmlCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
         ];

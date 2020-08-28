@@ -55,7 +55,7 @@ class TestAllCommand extends BaseCommand
     {
         $lint = $this->getApplication()->find($this->withPrefix('lint'));
         $analyze = $this->getApplication()->find($this->withPrefix('analyze'));
-        $test = $this->getApplication()->find($this->withPrefix('test'));
+        $test = $this->getApplication()->find($this->withPrefix('test:unit'));
 
         $lintExit = $lint->run($input, $output);
         $analyzeExit = $analyze->run($input, $output);

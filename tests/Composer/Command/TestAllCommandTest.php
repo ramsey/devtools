@@ -69,7 +69,7 @@ class TestAllCommandTest extends CommandTestCase
             ->andReturn($commandAnalyze);
         $application
             ->expects()
-            ->find($this->getCommand()->withPrefix('test'))
+            ->find($this->getCommand()->withPrefix('test:unit'))
             ->andReturn($commandTest);
 
         $this->getCommand()->setApplication($application);

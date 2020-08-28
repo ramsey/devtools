@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Security
 
 
+## [1.0.1] - 2020-08-28
+
+### Fixed
+
+* rename command to avoid collisions with root `composer test`
+
+
 ## [1.0.0] - 2020-08-27
 
 ### Added
@@ -28,5 +35,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * create a Composer plugin for development tools
 
 
-[Unreleased]: https://github.com/ramsey/devtools/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/ramsey/devtools/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/ramsey/devtools/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/ramsey/devtools/commits/1.0.0
