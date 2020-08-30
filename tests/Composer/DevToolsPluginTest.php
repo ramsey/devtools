@@ -88,6 +88,40 @@ class DevToolsPluginTest extends TestCase
         $this->assertSame('/path/to/bin-dir', $commands[0]->getBinDir());
     }
 
+    public function testGetCommandsWithRamseyDevtoolsCommandPrefixProperty(): void
+    {
+        /** @var Config & MockInterface $config */
+        $config = $this->mockery(Config::class);
+        $config->allows()->get('bin-dir')->andReturn('/path/to/bin-dir');
+
+        /** @var Composer & MockInterface $composer */
+        $composer = $this->mockery(Composer::class, [
+            'getPackage->getExtra' => [
+                'command-prefix' => 'foo',
+                'ramsey/devtools' => [
+                    'command-prefix' => 'bar',
+                ],
+            ],
+            'getConfig' => $config,
+        ]);
+
+        /** @var IOInterface & MockInterface $io */
+        $io = $this->mockery(IOInterface::class);
+
+        $pluginActivated = new DevToolsPlugin();
+        $pluginActivated->activate($composer, $io);
+
+        // This will test that our $composer instance was set
+        // statically on the class.
+        $pluginToUseForCommands = new DevToolsPlugin();
+        $commands = $pluginToUseForCommands->getCommands();
+
+        $this->assertContainsOnlyInstancesOf(BaseCommand::class, $commands);
+        $this->assertGreaterThan(0, count($commands));
+        $this->assertSame('bar:', $commands[0]->getPrefix());
+        $this->assertSame('/path/to/bin-dir', $commands[0]->getBinDir());
+    }
+
     public function testActivate(): void
     {
         /** @var Composer & MockInterface $composer */

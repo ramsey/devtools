@@ -109,7 +109,7 @@ class DevToolsPlugin implements
      */
     public function getCommands(): array
     {
-        $prefix = (string) (self::$composer->getPackage()->getExtra()['command-prefix'] ?? '');
+        $prefix = $this->getCommandPrefix();
 
         return [
             new AnalyzeCommand(self::$composer, $prefix),
@@ -143,5 +143,17 @@ class DevToolsPlugin implements
     public function getCaptainHookInstallCommand(): CaptainHookInstallCommand
     {
         return new CaptainHookInstallCommand(static::$composer, '', $this->repoRoot, $this->processFactory);
+    }
+
+    /**
+     * Use extra.command-prefix, if available, but extra.ramsey/dev-tools.command-prefix
+     * takes precedence over extra.command-prefix.
+     */
+    private function getCommandPrefix(): string
+    {
+        $extra = self::$composer->getPackage()->getExtra();
+        $prefix = (string) ($extra['command-prefix'] ?? '');
+
+        return (string) ($extra['ramsey/devtools']['command-prefix'] ?? $prefix);
     }
 }

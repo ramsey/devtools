@@ -62,14 +62,16 @@ composer list
 
 The commands this plugin provides are all intermingled with the rest of the
 Composer commands, so it may be hard to find them all. We have a way to group
-them by command namespace, though. Open your `composer.json` and add a
-`command-prefix` property to the `extra` section. You may use any prefix you
-wish.
+them by command namespace, though. Open `composer.json` and add a
+`ramsey/dev-tools.command-prefix` property to the `extra` section. You may use
+any prefix you wish.
 
 ``` json
 {
     "extra": {
-        "command-prefix": "my-prefix"
+        "ramsey/devtools": {
+            "command-prefix": "my-prefix"
+        }
     }
 }
 ```
@@ -86,10 +88,10 @@ of commands that looks like this:
   my-prefix:build:clear-cache   Removes everything from build/cache that is not under version control.
   my-prefix:lint                Checks source code for coding standards issues.
   my-prefix:lint:fix            Checks source code for coding standards issues and fixes them, if possible.
-  my-prefix:test                Runs the full unit test suite.
   my-prefix:test:all            Runs linting, static analysis, and unit tests.
   my-prefix:test:coverage:ci    Runs the unit test suite and generates a Clover coverage report.
   my-prefix:test:coverage:html  Runs the unit test suite and generates an HTML coverage report.
+  my-prefix:test:unit           Runs the unit test suite.
 ```
 
 You can also list commands by command prefix with `composer list my-prefix`.
