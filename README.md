@@ -60,10 +60,12 @@ composer list
 > You may additionally (or alternately) use `./vendor/bin/devtools` to access
 > the commands within this plugin.
 
+### Add a Command Prefix
+
 The commands this plugin provides are all intermingled with the rest of the
 Composer commands, so it may be hard to find them all. We have a way to group
 them by command namespace, though. Open `composer.json` and add a
-`ramsey/dev-tools.command-prefix` property to the `extra` section. You may use
+`ramsey/devtools.command-prefix` property to the `extra` section. You may use
 any prefix you wish.
 
 ``` json
@@ -95,6 +97,66 @@ of commands that looks like this:
 ```
 
 You can also list commands by command prefix with `composer list my-prefix`.
+
+### Extending or Overriding ramsey/devtools Commands
+
+Maybe the commands ramsey/devtools provides don't do everything you need, or
+maybe you want to replace them entirely. The configuration allows you to do
+this!
+
+Using the `ramsey/devtools.commands` property in the `extra` section of
+`composer.json`, you may specify any command (*without* your custom prefix, if
+you've configured one) as having other scripts to run, in addition to the
+command's default behavior, or you may override the default behavior entirely.
+
+Specifying additional scripts works exactly like
+[writing custom commands](https://getcomposer.org/doc/articles/scripts.md#writing-custom-commands)
+in `composer.json`, but the location is different. Everything you can do with
+a custom Composer command, you can do here because they're the same thing.
+
+``` json
+{
+    "extra": {
+        "ramsey/devtools": {
+            "commands": {
+                "lint": {
+                    "script": "@mylint"
+                },
+                "test:all": {
+                    "script": [
+                        "@mylint",
+                        "@phpbench"
+                    ]
+                }
+            }
+        }
+    },
+    "scripts": {
+        "mylint": "parallel-lint src tests",
+        "phpbench": "phpbench run"
+    }
+}
+```
+
+In this way, when you run `composer lint` or `composer test:all`, it will
+execute the default behavior first and then run your additional commands. To
+override the default behavior so that it doesn't run at all and only your
+scripts run, specify the `override` property and set it to `true`.
+
+``` json
+{
+    "extra": {
+        "ramsey/devtools": {
+            "commands": {
+                "lint": {
+                    "override": true,
+                    "script": "parallel-lint src tests"
+                }
+            }
+        }
+    }
+}
+```
 
 ### Composer Command Autocompletion
 

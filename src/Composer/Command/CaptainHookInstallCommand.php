@@ -46,11 +46,11 @@ class CaptainHookInstallCommand extends ProcessCommand
         ];
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<info>captainhook/captainhook:</info> Installing hooks...');
 
-        $exitCode = parent::execute($input, $output);
+        $exitCode = parent::doExecute($input, $output);
 
         if ($exitCode !== 0) {
             $output->writeln('<error>captainhook/captainhook: Unable to install hooks</error>');

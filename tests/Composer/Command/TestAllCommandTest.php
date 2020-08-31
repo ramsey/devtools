@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ramsey\Test\Dev\Tools\Composer\Command;
 
 use Composer\Console\Application;
-use Composer\EventDispatcher\EventDispatcher;
 use Mockery\MockInterface;
 use Ramsey\Dev\Tools\Composer\Command\TestAllCommand;
 use Symfony\Component\Console\Command\Command;
@@ -25,7 +24,7 @@ class TestAllCommandTest extends CommandTestCase
 
     public function testGetAliases(): void
     {
-        $this->assertSame(['test'], $this->getCommand()->getAliases());
+        $this->assertSame(['test'], $this->command->getAliases());
     }
 
     public function testRun(): void
@@ -48,12 +47,6 @@ class TestAllCommandTest extends CommandTestCase
         $input = new StringInput('');
         $output = new NullOutput();
 
-        /** @var EventDispatcher & MockInterface $eventDispatcher */
-        $eventDispatcher = $this->mockery(EventDispatcher::class, [
-            'dispatch' => null,
-        ]);
-        $this->getComposer()->setEventDispatcher($eventDispatcher);
-
         /** @var Application & MockInterface $application */
         $application = $this->mockery(Application::class, [
             'getHelperSet' => $this->mockery(HelperSet::class),
@@ -61,19 +54,19 @@ class TestAllCommandTest extends CommandTestCase
         $application->shouldReceive('getDefinition')->passthru();
         $application
             ->expects()
-            ->find($this->getCommand()->withPrefix('lint'))
+            ->find($this->command->withPrefix('lint'))
             ->andReturn($commandLint);
         $application
             ->expects()
-            ->find($this->getCommand()->withPrefix('analyze'))
+            ->find($this->command->withPrefix('analyze'))
             ->andReturn($commandAnalyze);
         $application
             ->expects()
-            ->find($this->getCommand()->withPrefix('test:unit'))
+            ->find($this->command->withPrefix('test:unit'))
             ->andReturn($commandTest);
 
-        $this->getCommand()->setApplication($application);
+        $this->command->setApplication($application);
 
-        $this->assertSame(0, $this->getCommand()->run($input, $output));
+        $this->assertSame(0, $this->command->run($input, $output));
     }
 }

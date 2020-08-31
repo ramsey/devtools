@@ -74,9 +74,9 @@ class LintFixCommand extends ProcessCommand
      *
      * @link https://github.com/squizlabs/PHP_CodeSniffer/issues/1818#issuecomment-354420927
      */
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
-        $exitCode = parent::execute($input, $output);
+        $exitCode = parent::doExecute($input, $output);
 
         if ($exitCode > 1) {
             return $exitCode;

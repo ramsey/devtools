@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ramsey\Test\Dev\Tools\Composer\Command;
 
 use Composer\Console\Application;
-use Composer\EventDispatcher\EventDispatcher;
 use Mockery\MockInterface;
 use Ramsey\Dev\Tools\Composer\Command\PreCommitCommand;
 use Symfony\Component\Console\Command\Command;
@@ -25,7 +24,7 @@ class PreCommitCommandTest extends CommandTestCase
 
     public function testGetName(): void
     {
-        $this->assertSame('pre-commit', $this->getCommand()->getName());
+        $this->assertSame('pre-commit', $this->command->getName());
     }
 
     public function testRun(): void
@@ -43,12 +42,6 @@ class PreCommitCommandTest extends CommandTestCase
         $input = new StringInput('');
         $output = new NullOutput();
 
-        /** @var EventDispatcher & MockInterface $eventDispatcher */
-        $eventDispatcher = $this->mockery(EventDispatcher::class, [
-            'dispatch' => null,
-        ]);
-        $this->getComposer()->setEventDispatcher($eventDispatcher);
-
         /** @var Application & MockInterface $application */
         $application = $this->mockery(Application::class, [
             'getHelperSet' => $this->mockery(HelperSet::class),
@@ -56,15 +49,15 @@ class PreCommitCommandTest extends CommandTestCase
         $application->shouldReceive('getDefinition')->passthru();
         $application
             ->expects()
-            ->find($this->getCommand()->withPrefix('lint:fix'))
+            ->find($this->command->withPrefix('lint:fix'))
             ->andReturn($commandLintFix);
         $application
             ->expects()
-            ->find($this->getCommand()->withPrefix('analyze'))
+            ->find($this->command->withPrefix('analyze'))
             ->andReturn($commandAnalyze);
 
-        $this->getCommand()->setApplication($application);
+        $this->command->setApplication($application);
 
-        $this->assertSame(0, $this->getCommand()->run($input, $output));
+        $this->assertSame(0, $this->command->run($input, $output));
     }
 }

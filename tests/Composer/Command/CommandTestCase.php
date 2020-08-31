@@ -6,10 +6,13 @@ namespace Ramsey\Test\Dev\Tools\Composer\Command;
 
 use Composer\Composer;
 use Composer\Config;
+use Composer\EventDispatcher\EventDispatcher;
 use Mockery\MockInterface;
 use Ramsey\Dev\Tools\Composer\Command\BaseCommand;
 use Ramsey\Dev\Tools\Process\ProcessFactory;
 use Ramsey\Dev\Tools\TestCase;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\NullOutput;
 
 use const DIRECTORY_SEPARATOR;
 
@@ -23,18 +26,29 @@ abstract class CommandTestCase extends TestCase
     protected string $binDir = '/path/to/bin-dir';
     protected string $repositoryRoot = '/path/to/repo';
 
-    private BaseCommand $command;
-    private Composer $composer;
+    protected BaseCommand $command;
+
+    /**
+     * @var Composer & MockInterface
+     */
+    protected Composer $composer;
 
     /**
      * @var Config & MockInterface
      */
-    private Config $config;
+    protected Config $config;
 
     /**
      * @var ProcessFactory & MockInterface
      */
-    private ProcessFactory $processFactory;
+    protected ProcessFactory $processFactory;
+
+    /**
+     * @var EventDispatcher & MockInterface
+     */
+    protected EventDispatcher $eventDispatcher;
+
+    abstract public function testRun(): void;
 
     protected function setUp(): void
     {
@@ -43,8 +57,15 @@ abstract class CommandTestCase extends TestCase
         $this->config = $this->mockery(Config::class);
         $this->config->allows()->get('bin-dir')->andReturn($this->binDir);
 
-        $this->composer = new Composer();
-        $this->composer->setConfig($this->config);
+        $this->eventDispatcher = $this->mockery(EventDispatcher::class);
+        $this->eventDispatcher->shouldReceive('dispatch');
+        $this->eventDispatcher->shouldReceive('dispatchScript')->andReturn(0);
+
+        $this->composer = $this->mockery(Composer::class, [
+            'getPackage->getExtra' => [],
+            'getConfig' => $this->config,
+            'getEventDispatcher' => $this->eventDispatcher,
+        ]);
 
         $this->processFactory = $this->mockery(ProcessFactory::class);
 
@@ -54,32 +75,6 @@ abstract class CommandTestCase extends TestCase
             $this->repositoryRoot,
             $this->processFactory,
         );
-    }
-
-    protected function getCommand(): BaseCommand
-    {
-        return $this->command;
-    }
-
-    protected function getComposer(): Composer
-    {
-        return $this->composer;
-    }
-
-    /**
-     * @return Config & MockInterface
-     */
-    protected function getConfig(): Config
-    {
-        return $this->config;
-    }
-
-    /**
-     * @return ProcessFactory & MockInterface
-     */
-    protected function getProcessFactory(): ProcessFactory
-    {
-        return $this->processFactory;
     }
 
     public function testGetBaseName(): void
@@ -127,5 +122,70 @@ abstract class CommandTestCase extends TestCase
         $this->expectExceptionMessage('Could not find an Application instance');
 
         $this->command->getApplication();
+    }
+
+    public function testRunWithOverride(): void
+    {
+        $this->composer->shouldReceive('getPackage->getExtra')->andReturn([
+            'ramsey/devtools' => [
+                'commands' => [
+                    $this->command->getBaseName() => [
+                        'override' => true,
+                    ],
+                ],
+            ],
+        ]);
+
+        $input = new StringInput('');
+        $output = new NullOutput();
+
+        $commandClass = $this->commandClass;
+        $command = new $commandClass(
+            $this->composer,
+            $this->prefix,
+            $this->repositoryRoot,
+            $this->processFactory,
+        );
+
+        $this->assertSame(0, $command->run($input, $output));
+    }
+
+    public function testRunWithAdditionalScripts(): void
+    {
+        $this->composer->shouldReceive('getPackage->getExtra')->andReturn([
+            'ramsey/devtools' => [
+                'commands' => [
+                    $this->command->getBaseName() => [
+                        'script' => [
+                            'a script to run',
+                            'another script to run',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->eventDispatcher->expects()->addListener(
+            $this->command->getName(),
+            'a script to run',
+        );
+
+        $this->eventDispatcher->expects()->addListener(
+            $this->command->getName(),
+            'another script to run',
+        );
+
+        $commandClass = $this->commandClass;
+
+        // Replace the command with a new one, since the constructor is where
+        // it figures out if there are additional scripts to add listeners for.
+        $this->command = new $commandClass(
+            $this->composer,
+            $this->prefix,
+            $this->repositoryRoot,
+            $this->processFactory,
+        );
+
+        $this->testRun();
     }
 }

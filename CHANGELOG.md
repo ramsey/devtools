@@ -21,6 +21,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Security
 
 
+## [1.2.0] - 2020-08-30
+
+### Added
+
+* use a namespaced Composer `extra` property (i.e., `extra.ramsey/dev-tools`)
+* allow additional scripts and overriding of commands
+
+
 ## [1.1.0] - 2020-08-28
 
 ### Added
@@ -42,7 +50,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * create a Composer plugin for development tools
 
 
-[Unreleased]: https://github.com/ramsey/devtools/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/ramsey/devtools/compare/1.2.0...HEAD
+[1.2.0]: https://github.com/ramsey/devtools/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/ramsey/devtools/compare/1.0.1...1.1.0
 [1.0.1]: https://github.com/ramsey/devtools/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/ramsey/devtools/commits/1.0.0

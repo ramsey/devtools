@@ -24,6 +24,7 @@ namespace Ramsey\Dev\Tools\Composer\Command;
 
 use Composer\Composer;
 use Ramsey\Dev\Tools\Process\ProcessFactory;
+use ReflectionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -56,7 +57,10 @@ abstract class ProcessCommand extends BaseCommand
         };
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    /**
+     * @throws ReflectionException
+     */
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $process = $this->processFactory->factory(
             $this->getProcessCommand($input, $output),

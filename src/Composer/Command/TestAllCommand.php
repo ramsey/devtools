@@ -51,7 +51,7 @@ class TestAllCommand extends BaseCommand
     /**
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $lint = $this->getApplication()->find($this->withPrefix('lint'));
         $analyze = $this->getApplication()->find($this->withPrefix('analyze'));

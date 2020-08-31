@@ -52,7 +52,7 @@ class PreCommitCommand extends BaseCommand
     /**
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $lintFix = $this->getApplication()->find($this->withPrefix('lint:fix'));
         $analyze = $this->getApplication()->find($this->withPrefix('analyze'));

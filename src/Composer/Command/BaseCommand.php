@@ -24,8 +24,11 @@ namespace Ramsey\Dev\Tools\Composer\Command;
 
 use Composer\Command\BaseCommand as ComposerBaseCommand;
 use Composer\Composer;
+use Composer\EventDispatcher\EventDispatcher;
 use RuntimeException;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 use const DIRECTORY_SEPARATOR;
 
@@ -33,16 +36,50 @@ abstract class BaseCommand extends ComposerBaseCommand
 {
     private string $prefix = '';
     private string $binDir;
+    private EventDispatcher $eventDispatcher;
+    private bool $overrideDefault;
 
+    /**
+     * Returns the name of this command, without the command prefix
+     */
     abstract public function getBaseName(): string;
+
+    /**
+     * Called by the execute() command in this BaseCommand class
+     */
+    abstract protected function doExecute(InputInterface $input, OutputInterface $output): int;
 
     public function __construct(Composer $composer, string $prefix)
     {
         $this->setComposer($composer);
         $this->setPrefix($prefix);
         $this->binDir = (string) $composer->getConfig()->get('bin-dir');
+        $this->eventDispatcher = $composer->getEventDispatcher();
 
         parent::__construct($this->withPrefix($this->getBaseName()));
+
+        /** @var array{override?: bool, script?: array<string>} $commandConfig */
+        $commandConfig = $composer->getPackage()->getExtra()['ramsey/devtools']['commands'][$this->getBaseName()] ?? [];
+
+        $this->overrideDefault = (bool) ($commandConfig['override'] ?? false);
+
+        $additionalScripts = (array) ($commandConfig['script'] ?? []);
+
+        /** @var callable $script */
+        foreach ($additionalScripts as $script) {
+            $this->eventDispatcher->addListener((string) $this->getName(), $script);
+        }
+    }
+
+    final protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $exitCode = 0;
+
+        if (!$this->overrideDefault) {
+            $exitCode = $this->doExecute($input, $output);
+        }
+
+        return $exitCode + $this->eventDispatcher->dispatchScript($this->withPrefix($this->getBaseName()));
     }
 
     public function getBinDir(): string

@@ -46,7 +46,7 @@ class AnalyzeCommand extends BaseCommand
     /**
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $phpStan = $this->getApplication()->find($this->withPrefix('analyze:phpstan'));
         $psalm = $this->getApplication()->find($this->withPrefix('analyze:psalm'));

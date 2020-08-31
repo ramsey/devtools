@@ -6,6 +6,7 @@ namespace Ramsey\Test\Dev\Tools\Composer;
 
 use Composer\Composer;
 use Composer\Config;
+use Composer\EventDispatcher\EventDispatcher;
 use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider;
 use Mockery;
@@ -63,12 +64,18 @@ class DevToolsPluginTest extends TestCase
         $config = $this->mockery(Config::class);
         $config->allows()->get('bin-dir')->andReturn('/path/to/bin-dir');
 
+        /** @var EventDispatcher & MockInterface $eventDispatcher */
+        $eventDispatcher = $this->mockery(EventDispatcher::class);
+        $eventDispatcher->shouldReceive('addListener');
+        $eventDispatcher->shouldReceive('dispatchScript')->andReturn(0);
+
         /** @var Composer & MockInterface $composer */
         $composer = $this->mockery(Composer::class, [
             'getPackage->getExtra' => [
                 'command-prefix' => 'foo',
             ],
             'getConfig' => $config,
+            'getEventDispatcher' => $eventDispatcher,
         ]);
 
         /** @var IOInterface & MockInterface $io */
@@ -94,6 +101,11 @@ class DevToolsPluginTest extends TestCase
         $config = $this->mockery(Config::class);
         $config->allows()->get('bin-dir')->andReturn('/path/to/bin-dir');
 
+        /** @var EventDispatcher & MockInterface $eventDispatcher */
+        $eventDispatcher = $this->mockery(EventDispatcher::class);
+        $eventDispatcher->shouldReceive('addListener');
+        $eventDispatcher->shouldReceive('dispatchScript')->andReturn(0);
+
         /** @var Composer & MockInterface $composer */
         $composer = $this->mockery(Composer::class, [
             'getPackage->getExtra' => [
@@ -103,6 +115,7 @@ class DevToolsPluginTest extends TestCase
                 ],
             ],
             'getConfig' => $config,
+            'getEventDispatcher' => $eventDispatcher,
         ]);
 
         /** @var IOInterface & MockInterface $io */
@@ -173,9 +186,16 @@ class DevToolsPluginTest extends TestCase
         $config = $this->mockery(Config::class);
         $config->allows()->get('bin-dir')->andReturn('/path/to/bin-dir');
 
+        /** @var EventDispatcher & MockInterface $eventDispatcher */
+        $eventDispatcher = $this->mockery(EventDispatcher::class);
+        $eventDispatcher->shouldReceive('addListener');
+        $eventDispatcher->shouldReceive('dispatchScript')->andReturn(0);
+
         /** @var Composer & MockInterface $composer */
         $composer = $this->mockery(Composer::class, [
+            'getPackage->getExtra' => [],
             'getConfig' => $config,
+            'getEventDispatcher' => $eventDispatcher,
         ]);
 
         /** @var IOInterface & MockInterface $io */

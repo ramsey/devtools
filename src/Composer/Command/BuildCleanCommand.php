@@ -47,11 +47,11 @@ class BuildCleanCommand extends ProcessCommand
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<info>Cleaning the build directory...</info>');
 
-        $exitCode = parent::execute($input, $output);
+        $exitCode = parent::doExecute($input, $output);
 
         if ($exitCode !== 0) {
             $output->writeln('<error>Unable to clean the build directory</error>');
