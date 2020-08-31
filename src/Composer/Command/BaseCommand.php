@@ -58,7 +58,7 @@ abstract class BaseCommand extends ComposerBaseCommand
 
         parent::__construct($this->withPrefix($this->getBaseName()));
 
-        /** @var array{override?: bool, script?: array<string>} $commandConfig */
+        /** @var array{override?: bool, script?: array<string>|string} $commandConfig */
         $commandConfig = $composer->getPackage()->getExtra()['ramsey/devtools']['commands'][$this->getBaseName()] ?? [];
 
         $this->overrideDefault = (bool) ($commandConfig['override'] ?? false);
@@ -79,7 +79,7 @@ abstract class BaseCommand extends ComposerBaseCommand
             $exitCode = $this->doExecute($input, $output);
         }
 
-        return $exitCode + $this->eventDispatcher->dispatchScript($this->withPrefix($this->getBaseName()));
+        return $exitCode + $this->eventDispatcher->dispatchScript((string) $this->getName());
     }
 
     public function getBinDir(): string

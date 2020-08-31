@@ -151,6 +151,7 @@ class DevToolsPlugin implements
      */
     private function getCommandPrefix(): string
     {
+        /** @psalm-var array{command-prefix?: string, ramsey/devtools?: array{command-prefix?: string}} $extra */
         $extra = self::$composer->getPackage()->getExtra();
         $prefix = (string) ($extra['command-prefix'] ?? '');
 

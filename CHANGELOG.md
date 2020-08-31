@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Security
 
 
+## [1.2.1] - 2020-08-31
+
+### Fixed
+
+* use correct command name when dispatching events
+
+
 ## [1.2.0] - 2020-08-30
 
 ### Added
