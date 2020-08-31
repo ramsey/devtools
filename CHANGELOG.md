@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* use a namespaced Composer `extra` property (i.e., `extra.ramsey/dev-tools`)
+* use a namespaced Composer `extra` property (i.e., `extra.ramsey/devtools`)
 * allow additional scripts and overriding of commands
 
 

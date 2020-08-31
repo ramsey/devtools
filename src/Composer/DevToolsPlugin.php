@@ -146,7 +146,7 @@ class DevToolsPlugin implements
     }
 
     /**
-     * Use extra.command-prefix, if available, but extra.ramsey/dev-tools.command-prefix
+     * Use extra.command-prefix, if available, but extra.ramsey/devtools.command-prefix
      * takes precedence over extra.command-prefix.
      */
     private function getCommandPrefix(): string
