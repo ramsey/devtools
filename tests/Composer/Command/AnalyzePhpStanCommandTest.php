@@ -12,7 +12,7 @@ class AnalyzePhpStanCommandTest extends ProcessCommandTestCase
     {
         $this->commandClass = AnalyzePhpStanCommand::class;
         $this->baseName = 'analyze:phpstan';
-        $this->processCommand = ['/path/to/bin-dir/phpstan', 'analyse', '--ansi', '--memory-limit=1G', '--foo'];
+        $this->processCommand = ['/path/to/bin-dir/phpstan', 'analyse', '--ansi', '--foo'];
 
         parent::setUp();
 

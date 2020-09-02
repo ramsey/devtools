@@ -48,7 +48,6 @@ class AnalyzePhpStanCommand extends ProcessCommand
                 $this->withBinPath('phpstan'),
                 'analyse',
                 '--ansi',
-                '--memory-limit=1G',
             ],
             $args,
         );
