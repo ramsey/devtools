@@ -21,6 +21,7 @@
         "ergebnis/composer-normalize": "^2.7",
         "hamcrest/hamcrest-php": "^2.0",
         "mockery/mockery": "^1.4",
+        "phly/keep-a-changelog": "^2.9",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.38",
         "phpstan/phpstan-mockery": "^0.12.7",
