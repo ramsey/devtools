@@ -37,6 +37,8 @@ use Ramsey\Dev\Tools\Composer\Command\BaseCommand;
 use Ramsey\Dev\Tools\Composer\Command\BuildCleanCommand;
 use Ramsey\Dev\Tools\Composer\Command\BuildClearCacheCommand;
 use Ramsey\Dev\Tools\Composer\Command\CaptainHookInstallCommand;
+use Ramsey\Dev\Tools\Composer\Command\Configuration;
+use Ramsey\Dev\Tools\Composer\Command\KeepAChangelogCommand;
 use Ramsey\Dev\Tools\Composer\Command\LintCommand;
 use Ramsey\Dev\Tools\Composer\Command\LintFixCommand;
 use Ramsey\Dev\Tools\Composer\Command\PreCommitCommand;
@@ -109,21 +111,23 @@ class DevToolsPlugin implements
      */
     public function getCommands(): array
     {
-        $prefix = $this->getCommandPrefix();
+        $config = new Configuration(self::$composer, $this->getCommandPrefix(), $this->repoRoot);
+        $configWithoutPrefix = new Configuration(self::$composer, '', $this->repoRoot);
 
         return [
-            new AnalyzeCommand(self::$composer, $prefix),
-            new AnalyzePhpStanCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
-            new AnalyzePsalmCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
-            new BuildCleanCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
-            new BuildClearCacheCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
-            new LintCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
-            new LintFixCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
-            new PreCommitCommand(self::$composer, $prefix),
-            new TestAllCommand(self::$composer, $prefix),
-            new TestUnitCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
-            new TestCoverageCiCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
-            new TestCoverageHtmlCommand(self::$composer, $prefix, $this->repoRoot, $this->processFactory),
+            new AnalyzeCommand($config),
+            new AnalyzePhpStanCommand($config),
+            new AnalyzePsalmCommand($config),
+            new BuildCleanCommand($config),
+            new BuildClearCacheCommand($config),
+            new KeepAChangelogCommand($config),
+            new LintCommand($config),
+            new LintFixCommand($config),
+            new PreCommitCommand($configWithoutPrefix),
+            new TestAllCommand($config),
+            new TestUnitCommand($config),
+            new TestCoverageCiCommand($config),
+            new TestCoverageHtmlCommand($config),
         ];
     }
 
@@ -142,7 +146,9 @@ class DevToolsPlugin implements
 
     public function getCaptainHookInstallCommand(): CaptainHookInstallCommand
     {
-        return new CaptainHookInstallCommand(static::$composer, '', $this->repoRoot, $this->processFactory);
+        $configWithoutPrefix = new Configuration(self::$composer, '', $this->repoRoot);
+
+        return new CaptainHookInstallCommand($configWithoutPrefix);
     }
 
     /**

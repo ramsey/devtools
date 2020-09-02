@@ -23,7 +23,6 @@ declare(strict_types=1);
 namespace Ramsey\Dev\Tools\Composer\Command;
 
 use Composer\Command\BaseCommand as ComposerBaseCommand;
-use Composer\Composer;
 use Composer\EventDispatcher\EventDispatcher;
 use RuntimeException;
 use Symfony\Component\Console\Application;
@@ -34,7 +33,7 @@ use const DIRECTORY_SEPARATOR;
 
 abstract class BaseCommand extends ComposerBaseCommand
 {
-    private string $prefix = '';
+    private Configuration $configuration;
     private string $binDir;
     private EventDispatcher $eventDispatcher;
     private bool $overrideDefault;
@@ -49,17 +48,20 @@ abstract class BaseCommand extends ComposerBaseCommand
      */
     abstract protected function doExecute(InputInterface $input, OutputInterface $output): int;
 
-    public function __construct(Composer $composer, string $prefix)
+    public function __construct(Configuration $configuration)
     {
-        $this->setComposer($composer);
-        $this->setPrefix($prefix);
-        $this->binDir = (string) $composer->getConfig()->get('bin-dir');
-        $this->eventDispatcher = $composer->getEventDispatcher();
+        $this->configuration = $configuration;
+        $this->binDir = (string) $configuration->getComposer()->getConfig()->get('bin-dir');
+        $this->eventDispatcher = $configuration->getComposer()->getEventDispatcher();
+        $this->setComposer($configuration->getComposer());
 
         parent::__construct($this->withPrefix($this->getBaseName()));
 
+        /** @psalm-var array{ramsey/devtools?: array{commands?: array<string, mixed>}} $extra */
+        $extra = $configuration->getComposer()->getPackage()->getExtra();
+
         /** @var array{override?: bool, script?: array<string>|string} $commandConfig */
-        $commandConfig = $composer->getPackage()->getExtra()['ramsey/devtools']['commands'][$this->getBaseName()] ?? [];
+        $commandConfig = $extra['ramsey/devtools']['commands'][$this->getBaseName()] ?? [];
 
         $this->overrideDefault = (bool) ($commandConfig['override'] ?? false);
 
@@ -82,6 +84,11 @@ abstract class BaseCommand extends ComposerBaseCommand
         return $exitCode + $this->eventDispatcher->dispatchScript((string) $this->getName());
     }
 
+    public function getConfiguration(): Configuration
+    {
+        return $this->configuration;
+    }
+
     public function getBinDir(): string
     {
         return $this->binDir;
@@ -94,18 +101,13 @@ abstract class BaseCommand extends ComposerBaseCommand
 
     public function getPrefix(): string
     {
-        return $this->prefix;
-    }
+        $prefix = $this->configuration->getCommandPrefix();
 
-    public function setPrefix(string $prefix): self
-    {
         if ($prefix !== '' && substr($prefix, -1) !== ':') {
             $prefix .= ':';
         }
 
-        $this->prefix = $prefix;
-
-        return $this;
+        return $prefix;
     }
 
     public function withPrefix(string $name): string

@@ -9,6 +9,7 @@ use Composer\Config;
 use Composer\EventDispatcher\EventDispatcher;
 use Mockery\MockInterface;
 use Ramsey\Dev\Tools\Composer\Command\BaseCommand;
+use Ramsey\Dev\Tools\Composer\Command\Configuration;
 use Ramsey\Dev\Tools\Process\ProcessFactory;
 use Ramsey\Dev\Tools\TestCase;
 use Symfony\Component\Console\Input\StringInput;
@@ -69,12 +70,14 @@ abstract class CommandTestCase extends TestCase
 
         $this->processFactory = $this->mockery(ProcessFactory::class);
 
-        $this->command = new $commandClass(
+        $configuration = new Configuration(
             $this->composer,
             $this->prefix,
             $this->repositoryRoot,
             $this->processFactory,
         );
+
+        $this->command = new $commandClass($configuration);
     }
 
     public function testGetBaseName(): void
@@ -96,22 +99,16 @@ abstract class CommandTestCase extends TestCase
 
     public function testGetPrefix(): void
     {
-        $prefixWithColon = $this->prefix . ':';
+        $expectedPrefix = $this->prefix ? $this->prefix . ':' : '';
 
-        $this->assertSame($prefixWithColon, $this->command->getPrefix());
-    }
-
-    public function testSetPrefixReturnsSelfAndSetsPrefix(): void
-    {
-        $this->assertSame($this->command, $this->command->setPrefix('baz'));
-        $this->assertSame('baz:', $this->command->getPrefix());
+        $this->assertSame($expectedPrefix, $this->command->getPrefix());
     }
 
     public function testWithPrefix(): void
     {
-        $prefixWithCommand = $this->prefix . ':cmd';
+        $expected = $this->prefix ? $this->prefix . ':cmd' : 'cmd';
 
-        $this->assertSame($prefixWithCommand, $this->command->withPrefix('cmd'));
+        $this->assertSame($expected, $this->command->withPrefix('cmd'));
     }
 
     public function testGetApplicationThrowsException(): void
@@ -139,13 +136,15 @@ abstract class CommandTestCase extends TestCase
         $input = new StringInput('');
         $output = new NullOutput();
 
-        $commandClass = $this->commandClass;
-        $command = new $commandClass(
+        $configuration = new Configuration(
             $this->composer,
             $this->prefix,
             $this->repositoryRoot,
             $this->processFactory,
         );
+
+        $commandClass = $this->commandClass;
+        $command = new $commandClass($configuration);
 
         $this->assertSame(0, $command->run($input, $output));
     }
@@ -177,14 +176,16 @@ abstract class CommandTestCase extends TestCase
 
         $commandClass = $this->commandClass;
 
-        // Replace the command with a new one, since the constructor is where
-        // it figures out if there are additional scripts to add listeners for.
-        $this->command = new $commandClass(
+        $configuration = new Configuration(
             $this->composer,
             $this->prefix,
             $this->repositoryRoot,
             $this->processFactory,
         );
+
+        // Replace the command with a new one, since the constructor is where
+        // it figures out if there are additional scripts to add listeners for.
+        $this->command = new $commandClass($configuration);
 
         $this->testRun();
     }

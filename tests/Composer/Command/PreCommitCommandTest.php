@@ -18,6 +18,7 @@ class PreCommitCommandTest extends CommandTestCase
     {
         $this->commandClass = PreCommitCommand::class;
         $this->baseName = 'pre-commit';
+        $this->prefix = '';
 
         parent::setUp();
     }

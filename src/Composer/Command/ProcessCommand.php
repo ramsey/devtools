@@ -22,33 +22,16 @@ declare(strict_types=1);
 
 namespace Ramsey\Dev\Tools\Composer\Command;
 
-use Composer\Composer;
-use Ramsey\Dev\Tools\Process\ProcessFactory;
 use ReflectionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class ProcessCommand extends BaseCommand
 {
-    private string $repositoryRoot;
-    private ProcessFactory $processFactory;
-
     /**
      * @return string[]
      */
     abstract public function getProcessCommand(InputInterface $input, OutputInterface $output): array;
-
-    public function __construct(
-        Composer $composer,
-        string $prefix,
-        string $repositoryRoot,
-        ProcessFactory $processFactory
-    ) {
-        $this->repositoryRoot = $repositoryRoot;
-        $this->processFactory = $processFactory;
-
-        parent::__construct($composer, $prefix);
-    }
 
     protected function getProcessCallback(OutputInterface $output): callable
     {
@@ -62,9 +45,9 @@ abstract class ProcessCommand extends BaseCommand
      */
     protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
-        $process = $this->processFactory->factory(
+        $process = $this->getConfiguration()->getProcessFactory()->factory(
             $this->getProcessCommand($input, $output),
-            $this->repositoryRoot,
+            $this->getConfiguration()->getRepositoryRoot(),
         );
 
         $process->start();

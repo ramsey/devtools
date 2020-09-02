@@ -34,12 +34,6 @@ class PreCommitCommand extends BaseCommand
         return 'pre-commit';
     }
 
-    public function getName(): string
-    {
-        // Do not include the prefix with the name for the pre-commit command.
-        return $this->getBaseName();
-    }
-
     protected function configure(): void
     {
         $this
