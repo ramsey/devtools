@@ -48,7 +48,7 @@ class TestCoverageHtmlCommand extends ProcessCommand
                 $this->withBinPath('phpunit'),
                 '--colors=always',
                 '--coverage-html',
-                'build/coverage',
+                'build/coverage/coverage-html',
             ],
             $args,
         );

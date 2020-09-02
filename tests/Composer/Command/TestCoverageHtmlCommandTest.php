@@ -16,7 +16,7 @@ class TestCoverageHtmlCommandTest extends ProcessCommandTestCase
             '/path/to/bin-dir/phpunit',
             '--colors=always',
             '--coverage-html',
-            'build/coverage',
+            'build/coverage/coverage-html',
             '--group',
             'bip',
         ];

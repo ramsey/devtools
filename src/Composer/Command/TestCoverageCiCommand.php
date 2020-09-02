@@ -48,7 +48,11 @@ class TestCoverageCiCommand extends ProcessCommand
                 $this->withBinPath('phpunit'),
                 '--colors=always',
                 '--coverage-clover',
-                'build/logs/clover.xml',
+                'build/coverage/clover.xml',
+                '--coverage-xml',
+                'build/coverage/coverage-xml',
+                '--log-junit',
+                'build/coverage/junit.xml',
             ],
             $args,
         );
@@ -57,7 +61,7 @@ class TestCoverageCiCommand extends ProcessCommand
     protected function configure(): void
     {
         $this
-            ->setDescription('Runs the unit test suite and generates a Clover coverage report.')
+            ->setDescription('Runs the unit test suite and generates coverage reports for CI workflows.')
             ->setDefinition([
                 new InputArgument('args', InputArgument::IS_ARRAY | InputArgument::OPTIONAL, ''),
             ]);

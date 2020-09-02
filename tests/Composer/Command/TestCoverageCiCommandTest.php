@@ -16,7 +16,11 @@ class TestCoverageCiCommandTest extends ProcessCommandTestCase
             '/path/to/bin-dir/phpunit',
             '--colors=always',
             '--coverage-clover',
-            'build/logs/clover.xml',
+            'build/coverage/clover.xml',
+            '--coverage-xml',
+            'build/coverage/coverage-xml',
+            '--log-junit',
+            'build/coverage/junit.xml',
             '--group',
             'foo',
         ];
