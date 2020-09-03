@@ -18,14 +18,13 @@ class PreCommitCommandTest extends CommandTestCase
     {
         $this->commandClass = PreCommitCommand::class;
         $this->baseName = 'pre-commit';
-        $this->prefix = '';
 
         parent::setUp();
     }
 
-    public function testGetName(): void
+    public function testGetAliases(): void
     {
-        $this->assertSame('pre-commit', $this->command->getName());
+        $this->assertSame(['pre-commit'], $this->command->getAliases());
     }
 
     public function testRun(): void

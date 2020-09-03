@@ -34,10 +34,20 @@ class PreCommitCommand extends BaseCommand
         return 'pre-commit';
     }
 
+    /**
+     * Supports the use of `composer pre-commit`, without the command prefix/namespace
+     *
+     * @return string[]
+     */
+    public function getAliases(): array
+    {
+        return ['pre-commit'];
+    }
+
     protected function configure(): void
     {
         $this
-            ->setDescription('Commands that run as part of the CaptainHook Git pre-commit hook.')
+            ->setDescription('Commands that run as part of the pre-commit hook.')
             ->setDefinition([
                 new InputArgument('args', InputArgument::IS_ARRAY | InputArgument::OPTIONAL, ''),
             ]);

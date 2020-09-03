@@ -112,7 +112,6 @@ class DevToolsPlugin implements
     public function getCommands(): array
     {
         $config = new Configuration(self::$composer, $this->getCommandPrefix(), $this->repoRoot);
-        $configWithoutPrefix = new Configuration(self::$composer, '', $this->repoRoot);
 
         return [
             new AnalyzeCommand($config),
@@ -123,7 +122,7 @@ class DevToolsPlugin implements
             new KeepAChangelogCommand($config),
             new LintCommand($config),
             new LintFixCommand($config),
-            new PreCommitCommand($configWithoutPrefix),
+            new PreCommitCommand($config),
             new TestAllCommand($config),
             new TestUnitCommand($config),
             new TestCoverageCiCommand($config),
