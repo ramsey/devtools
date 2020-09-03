@@ -28,7 +28,7 @@
         "phpstan/phpstan-phpunit": "^0.12.16",
         "phpunit/phpunit": "^9.3",
         "ramsey/coding-standard": "^1.1",
-        "ramsey/composer-repl": "^1.0",
+        "ramsey/composer-repl": "^1.1.1",
         "ramsey/conventional-commits": "^1.0",
         "roave/security-advisories": "dev-master",
         "symfony/process": "^5.1",
