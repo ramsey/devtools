@@ -16,6 +16,7 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
 
     strategy:
+      fail-fast: true
       matrix:
         dependencies:
           - "locked"
@@ -66,6 +67,7 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
 
     strategy:
+      fail-fast: true
       matrix:
         dependencies:
           - "locked"
@@ -119,6 +121,7 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
 
     strategy:
+      fail-fast: false
       matrix:
         dependencies:
           - "lowest"
