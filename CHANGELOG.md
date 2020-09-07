@@ -5,27 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 1.4.1 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
+## 1.4.1 - 2020-09-07
 
 ### Fixed
 
 - Test the 1.8.0 release of laminas/automatic-releases to ensure [laminas/automatic-releases#73](https://github.com/laminas/automatic-releases/pull/73) fixes [laminas/automatic-releases#57](https://github.com/laminas/automatic-releases/issues/57)
+
+
+-----
+
+### Release Notes for [1.4.1](https://github.com/ramsey/devtools/milestone/3)
+
+1.4.x bugfix release (patch)
+
+### 1.4.1
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **0**
+- Total contributors: **0**
 
 ## 1.4.0 - 2020-09-04
 
