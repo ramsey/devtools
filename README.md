@@ -118,6 +118,7 @@ a custom Composer command, you can do here because they're the same thing.
 {
     "extra": {
         "ramsey/devtools": {
+            "command-prefix": "my-prefix",
             "commands": {
                 "lint": {
                     "script": "@mylint"
