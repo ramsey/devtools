@@ -29,6 +29,8 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use function substr;
+
 use const DIRECTORY_SEPARATOR;
 
 abstract class BaseCommand extends ComposerBaseCommand

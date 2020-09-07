@@ -12,6 +12,7 @@ use Ramsey\Dev\Tools\Composer\Command\BaseCommand;
 use Ramsey\Dev\Tools\Composer\Command\Configuration;
 use Ramsey\Dev\Tools\Process\ProcessFactory;
 use Ramsey\Dev\Tools\TestCase;
+use RuntimeException;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\NullOutput;
 
@@ -115,7 +116,7 @@ abstract class CommandTestCase extends TestCase
     {
         $this->command->setApplication(null);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Could not find an Application instance');
 
         $this->command->getApplication();

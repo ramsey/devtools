@@ -18,6 +18,9 @@ use Ramsey\Dev\Tools\TestCase;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use function anInstanceOf;
+use function count;
+
 class DevToolsPluginTest extends TestCase
 {
     public function testGetSubscribedEvents(): void

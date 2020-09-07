@@ -50,6 +50,7 @@ use Ramsey\Dev\Tools\Process\ProcessFactory;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
+use function dirname;
 use function realpath;
 
 /**
