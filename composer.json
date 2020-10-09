@@ -4,6 +4,7 @@
     "description": "A Composer plugin to aid PHP library and application development.",
     "keywords": [
         "development",
+        "plugin",
         "tools"
     ],
     "license": "MIT",
@@ -16,26 +17,8 @@
     ],
     "require": {
         "php": "^7.4 || ^8",
-        "captainhook/captainhook": "^5.3",
         "composer-plugin-api": "^1.1 || ^2",
-        "ergebnis/composer-normalize": "^2.7",
-        "hamcrest/hamcrest-php": "^2.0",
-        "mockery/mockery": "^1.4",
-        "phly/keep-a-changelog": "^2.9",
-        "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "^0.12.38",
-        "phpstan/phpstan-mockery": "^0.12.7",
-        "phpstan/phpstan-phpunit": "^0.12.16",
-        "phpunit/phpunit": "^9.3",
-        "ramsey/coding-standard": "^1.2",
-        "ramsey/composer-repl": "^1.1.1",
-        "ramsey/conventional-commits": "^1.0",
-        "roave/security-advisories": "dev-master",
-        "symfony/process": "^5.1",
-        "vimeo/psalm": "^3.14"
-    },
-    "require-dev": {
-        "composer/composer": "^1.1 || ^2.0.0@dev"
+        "ramsey/devtools-lib": "^1.0.1"
     },
     "config": {
         "sort-packages": true
@@ -46,28 +29,9 @@
         },
         "class": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin"
     },
-    "autoload": {
-        "psr-4": {
-            "Ramsey\\Dev\\Tools\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Ramsey\\Test\\Dev\\Tools\\": "tests/"
-        },
-        "files": [
-            "vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest.php"
-        ]
-    },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "bin": [
-        "bin/devtools"
-    ],
     "scripts": {
-        "post-autoload-dump": "captainhook install --ansi -f -s",
-        "devtools": "bin/devtools --ansi",
-        "pre-commit": "bin/devtools lint:fix; bin/devtools analyze",
-        "test": "bin/devtools test:all"
+        "post-autoload-dump": "captainhook install --ansi -f -s"
     }
 }
