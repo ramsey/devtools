@@ -8,9 +8,9 @@
     <a href="https://github.com/ramsey/devtools"><img src="http://img.shields.io/badge/source-ramsey/devtools-blue.svg?style=flat-square" alt="Source Code"></a>
     <a href="https://packagist.org/packages/ramsey/devtools"><img src="https://img.shields.io/packagist/v/ramsey/devtools.svg?style=flat-square&label=release" alt="Download Package"></a>
     <a href="https://php.net"><img src="https://img.shields.io/packagist/php-v/ramsey/devtools.svg?style=flat-square&colorB=%238892BF" alt="PHP Programming Language"></a>
-    <a href="https://github.com/ramsey/devtools/actions?query=workflow%3ACI"><img src="https://img.shields.io/github/workflow/status/ramsey/devtools/CI?label=CI&logo=github&style=flat-square" alt="Build Status"></a>
-    <a href="https://codecov.io/gh/ramsey/devtools"><img src="https://img.shields.io/codecov/c/gh/ramsey/devtools?label=codecov&logo=codecov&style=flat-square" alt="Codecov Code Coverage"></a>
-    <a href="https://shepherd.dev/github/ramsey/devtools"><img src="https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fshepherd.dev%2Fgithub%2Framsey%2Fdevtools%2Fcoverage" alt="Psalm Type Coverage"></a>
+    <a href="https://github.com/ramsey/devtools-lib/actions?query=workflow%3ACI"><img src="https://img.shields.io/github/workflow/status/ramsey/devtools-lib/CI?label=CI&logo=github&style=flat-square" alt="Build Status"></a>
+    <a href="https://codecov.io/gh/ramsey/devtools-lib"><img src="https://img.shields.io/codecov/c/gh/ramsey/devtools-lib?label=codecov&logo=codecov&style=flat-square" alt="Codecov Code Coverage"></a>
+    <a href="https://shepherd.dev/github/ramsey/devtools-lib"><img src="https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fshepherd.dev%2Fgithub%2Framsey%2Fdevtools-lib%2Fcoverage" alt="Psalm Type Coverage"></a>
     <a href="https://github.com/ramsey/devtools/blob/master/LICENSE"><img src="https://img.shields.io/packagist/l/ramsey/devtools.svg?style=flat-square&colorB=darkcyan" alt="Read License"></a>
     <a href="https://packagist.org/packages/ramsey/devtools/stats"><img src="https://img.shields.io/packagist/dt/ramsey/devtools.svg?style=flat-square&colorB=darkmagenta" alt="Package downloads on Packagist"></a>
     <a href="https://phpc.chat/channel/ramsey"><img src="https://img.shields.io/badge/phpc.chat-%23ramsey-darkslateblue?style=flat-square" alt="Chat with the maintainers"></a>
@@ -26,8 +26,10 @@ This is an effort to consolidate and simplify.
 These tools might not be for you, and that's okay.
 
 Maybe these tools help a lot, but you have different needs. That's also okay.
-Feel free to fork this repository, change the package name, and make your own
-devtools.
+You may create your own devtools, requiring
+[ramsey/devtools-lib](https://github.com/ramsey/devtools-lib) (the library code
+behind this plugin), to extend and add to these tools, creating your own
+Composer plugin.
 
 Of course, if you want to help improve these tools, I welcome your contributions.
 Feel free to open issues, ask about or request features, and submit PRs. I can't
@@ -56,9 +58,6 @@ provides.
 ``` bash
 composer list
 ```
-
-> You may additionally (or alternately) use `./vendor/bin/devtools` to access
-> the commands within this plugin.
 
 ### Add a Command Prefix
 
@@ -189,11 +188,14 @@ composer my-prefix:[TAB][TAB]
 
 ## Contributing
 
-Contributions are welcome! Before contributing to this project, familiarize
-yourself with [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions are welcome!
 
-To develop this project, you will need [PHP](https://www.php.net) 7.4 or greater
-and [Composer](https://getcomposer.org).
+First, check out [ramsey/devtools-lib](https://github.com/ramsey/devtools-lib)
+to decide whether your contribution is best suited for that library.
+
+Before contributing to this project, familiarize yourself with
+[CONTRIBUTING.md](CONTRIBUTING.md). To develop this project, you will need
+[PHP](https://www.php.net) 7.4 or greater and [Composer](https://getcomposer.org).
 
 After cloning this repository locally, execute the following commands:
 
@@ -203,64 +205,6 @@ composer install
 ```
 
 Now, you are ready to develop!
-
-### Tooling
-
-This project uses [CaptainHook](https://github.com/CaptainHookPhp/captainhook)
-to validate all staged changes prior to commit.
-
-#### Commands
-
-To see all the commands available for contributing to this project:
-
-``` bash
-composer devtools
-```
-
-#### Coding Standards
-
-This project follows a superset of [PSR-12](https://www.php-fig.org/psr/psr-12/)
-coding standards, enforced by [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer).
-The project PHP_CodeSniffer configuration may be found in `phpcs.xml.dist`.
-
-CaptainHook will run PHP_CodeSniffer before committing. It will attempt to fix
-any errors it can, and it will reject the commit if there are any un-fixable
-issues. Many issues can be fixed automatically and will be done so pre-commit.
-
-You may lint the entire codebase using PHP_CodeSniffer with the following
-commands:
-
-``` bash
-# Lint
-composer devtools lint
-
-# Lint and autofix
-composer devtools lint:fix
-```
-
-#### Static Analysis
-
-This project uses a combination of [PHPStan](https://github.com/phpstan/phpstan)
-and [Psalm](https://github.com/vimeo/psalm) to provide static analysis of PHP
-code. Configurations for these are in `phpstan.neon.dist` and `psalm.xml`,
-respectively.
-
-CaptainHook will run PHPStan and Psalm before committing. The pre-commit hook
-does not attempt to fix any static analysis errors. Instead, the commit will
-fail, and you must fix the errors manually.
-
-You may run static analysis manually across the whole codebase with the
-following command:
-
-``` bash
-# Static analysis
-composer devtools analyze
-```
-
-#### Project Structure
-
-This project uses [pds/skeleton](https://github.com/php-pds/skeleton) as its
-base folder structure and layout.
 
 ## Copyright and License
 
