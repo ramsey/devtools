@@ -20,6 +20,9 @@
         "composer-plugin-api": "^1.1 || ^2",
         "ramsey/devtools-lib": "^1.0.1"
     },
+    "require-dev": {
+        "composer/composer": "^1.1 || ^2.0.0@dev"
+    },
     "config": {
         "sort-packages": true
     },
