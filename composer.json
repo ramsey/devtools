@@ -18,10 +18,10 @@
     "require": {
         "php": "^7.4 || ^8",
         "composer-plugin-api": "^1.1 || ^2",
-        "ramsey/devtools-lib": "^1.0.1"
+        "ramsey/devtools-lib": "^1.0.2"
     },
     "require-dev": {
-        "composer/composer": "^1.1 || ^2.0.0@dev"
+        "composer/composer": "^1.1 || ^2.0"
     },
     "config": {
         "sort-packages": true
@@ -30,7 +30,10 @@
         "branch-alias": {
             "dev-main": "1.x-dev"
         },
-        "class": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin"
+        "class": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin",
+        "ramsey/conventional-commits": {
+            "configFile": "conventional-commits.json"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
