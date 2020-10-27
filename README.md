@@ -188,23 +188,8 @@ composer my-prefix:[TAB][TAB]
 
 ## Contributing
 
-Contributions are welcome!
-
-First, check out [ramsey/devtools-lib](https://github.com/ramsey/devtools-lib)
-to decide whether your contribution is best suited for that library.
-
-Before contributing to this project, familiarize yourself with
-[CONTRIBUTING.md](CONTRIBUTING.md). To develop this project, you will need
-[PHP](https://www.php.net) 7.4 or greater and [Composer](https://getcomposer.org).
-
-After cloning this repository locally, execute the following commands:
-
-``` bash
-cd /path/to/repository
-composer install
-```
-
-Now, you are ready to develop!
+Contributions are welcome! To contribute, please familiarize yourself with
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Copyright and License
 
