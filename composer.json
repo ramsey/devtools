@@ -17,19 +17,13 @@
     ],
     "require": {
         "php": "^7.4 || ^8",
-        "composer-plugin-api": "^1.1 || ^2",
-        "ramsey/devtools-lib": "^1.0.2"
-    },
-    "require-dev": {
-        "composer/composer": "^1.1 || ^2.0"
+        "composer-plugin-api": "^2",
+        "ramsey/devtools-lib": "^1.1"
     },
     "config": {
         "sort-packages": true
     },
     "extra": {
-        "branch-alias": {
-            "dev-main": "1.x-dev"
-        },
         "class": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin",
         "ramsey/conventional-commits": {
             "configFile": "conventional-commits.json"
