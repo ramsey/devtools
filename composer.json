@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.4 || ^8",
         "composer-plugin-api": "^2",
-        "ramsey/devtools-lib": "^1.1"
+        "ramsey/devtools-lib": "^1.2"
     },
     "config": {
         "sort-packages": true
@@ -32,6 +32,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "post-autoload-dump": "captainhook install --ansi -f -s"
+        "post-package-install": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin::setupBuildDirectory",
+        "post-package-update": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin::setupBuildDirectory"
     }
 }

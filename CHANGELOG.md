@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 1.7.0 - 2021-07-11
+
+### Added
+
+- Bump to next minor version of ramsey/devtools-lib, which includes the following changes:
+  - Add `lint:style` command to check for coding standards issues.
+  - Add `lint:syntax` command to check for syntax errors.
+  - Add `license` command that uses [madewithlove/license-checker](https://github.com/madewithlove/license-checker-php).
+  - Add `clean:coverage` command to remove code coverage logging files.
+  - Improve documentation for all commands.
+  - The `lint` command is now aliased to `lint:all` and executes `lint:pds`, `lint:syntax`, and `lint:style`.
+  - Deprecate `pre-commit` command and make it a no-op. This also deprecates `Ramsey\Dev\Tools\Composer\Command\PreCommitCommand`.
+  - Deprecate `Ramsey\Dev\Tools\Composer\Command\CaptainHookInstallCommand`. This was only used internally and has been replaced with [captainhook/plugin-composer](https://github.com/captainhookphp/plugin-composer).
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 1.6.0 - 2021-03-21
 
 ### Added
