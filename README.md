@@ -206,5 +206,5 @@ security issue in software that is maintained in this repository, please read
 ## Copyright and License
 
 The ramsey/devtools library is copyright © [Ben Ramsey](https://benramsey.com)
-and licensed for use under the MIT License (MIT). Please see [LICENSE](LICENSE)
-for more information.
+and licensed for use under the terms of the
+MIT License (MIT). Please see [LICENSE](LICENSE) for more information.

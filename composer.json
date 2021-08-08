@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.4 || ^8",
         "composer-plugin-api": "^2",
-        "ramsey/devtools-lib": "^1.2.1"
+        "ramsey/devtools-lib": "^1.2.2"
     },
     "config": {
         "sort-packages": true
