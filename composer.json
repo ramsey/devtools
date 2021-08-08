@@ -18,21 +18,20 @@
     "require": {
         "php": "^7.4 || ^8",
         "composer-plugin-api": "^2",
-        "ramsey/devtools-lib": "^1.2"
+        "ramsey/devtools-lib": "^1.2.1"
     },
     "config": {
         "sort-packages": true
     },
     "extra": {
+        "captainhook": {
+            "force-install": true
+        },
         "class": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin",
         "ramsey/conventional-commits": {
             "configFile": "conventional-commits.json"
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "scripts": {
-        "post-package-install": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin::setupBuildDirectory",
-        "post-package-update": "Ramsey\\Dev\\Tools\\Composer\\DevToolsPlugin::setupBuildDirectory"
-    }
+    "prefer-stable": true
 }

@@ -1,5 +1,8 @@
 {
     "config": {
+        "ansi-colors": true,
+        "fail-on-first-error": false,
+        "plugins": [],
         "verbosity": "normal"
     },
     "commit-msg": {
@@ -76,5 +79,13 @@
                 ]
             }
         ]
+    },
+    "post-rewrite": {
+        "enabled": false,
+        "actions": []
+    },
+    "post-change": {
+        "enabled": false,
+        "actions": []
     }
 }

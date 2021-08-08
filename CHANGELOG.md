@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Bump to next minor version of ramsey/devtools-lib, with lint:pds command.
+- Bump to next minor version of ramsey/devtools-lib, with `lint:pds` command.
 
 ### Changed
 

@@ -5,11 +5,11 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/ramsey/devtools"><img src="http://img.shields.io/badge/source-ramsey/devtools-blue.svg?style=flat-square" alt="Source Code"></a>
+    <a href="https://github.com/ramsey/devtools"><img src="https://img.shields.io/badge/source-ramsey/devtools-blue.svg?style=flat-square" alt="Source Code"></a>
     <a href="https://packagist.org/packages/ramsey/devtools"><img src="https://img.shields.io/packagist/v/ramsey/devtools.svg?style=flat-square&label=release" alt="Download Package"></a>
     <a href="https://php.net"><img src="https://img.shields.io/packagist/php-v/ramsey/devtools.svg?style=flat-square&colorB=%238892BF" alt="PHP Programming Language"></a>
-    <a href="https://github.com/ramsey/devtools/blob/master/LICENSE"><img src="https://img.shields.io/packagist/l/ramsey/devtools.svg?style=flat-square&colorB=darkcyan" alt="Read License"></a>
-    <a href="https://github.com/ramsey/devtools-lib/actions?query=workflow%3ACI"><img src="https://img.shields.io/github/workflow/status/ramsey/devtools-lib/CI?label=CI&logo=github&style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/ramsey/devtools/blob/main/LICENSE"><img src="https://img.shields.io/packagist/l/ramsey/devtools.svg?style=flat-square&colorB=darkcyan" alt="Read License"></a>
+    <a href="https://github.com/ramsey/devtools-lib/actions/workflows/continuous-integration.yml"><img src="https://img.shields.io/github/workflow/status/ramsey/devtools-lib/build/main?style=flat-square&logo=github" alt="Build Status"></a>
     <a href="https://codecov.io/gh/ramsey/devtools-lib"><img src="https://img.shields.io/codecov/c/gh/ramsey/devtools-lib?label=codecov&logo=codecov&style=flat-square" alt="Codecov Code Coverage"></a>
     <a href="https://shepherd.dev/github/ramsey/devtools-lib"><img src="https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fshepherd.dev%2Fgithub%2Framsey%2Fdevtools-lib%2Fcoverage" alt="Psalm Type Coverage"></a>
 </p>
@@ -80,17 +80,24 @@ of commands that looks like this:
 
 ```
  my-prefix
-  my-prefix:analyze             Performs static analysis checks on the code base.
-  my-prefix:analyze:phpstan     Runs the PHPStan static analyzer.
-  my-prefix:analyze:psalm       Runs the Psalm static analyzer.
-  my-prefix:build:clean         Removes everything from the build directory that is not under version control.
-  my-prefix:build:clear-cache   Removes everything from build/cache that is not under version control.
-  my-prefix:lint                Checks source code for coding standards issues.
-  my-prefix:lint:fix            Checks source code for coding standards issues and fixes them, if possible.
-  my-prefix:test:all            Runs linting, static analysis, and unit tests.
-  my-prefix:test:coverage:ci    Runs the unit test suite and generates a Clover coverage report.
-  my-prefix:test:coverage:html  Runs the unit test suite and generates an HTML coverage report.
-  my-prefix:test:unit           Runs the unit test suite.
+  my-prefix:analyze:all           Runs all static analysis checks.
+  my-prefix:analyze:phpstan       Runs the PHPStan static analyzer.
+  my-prefix:analyze:psalm         Runs the Psalm static analyzer.
+  my-prefix:build:clean           Cleans the build/ directory.
+  my-prefix:build:clean:all       Cleans the build/ directory.
+  my-prefix:build:clean:cache     Cleans the build/cache/ directory.
+  my-prefix:build:clean:coverage  Cleans the build/coverage/ directory.
+  my-prefix:changelog             Support for working with Keep A Changelog.
+  my-prefix:license               Checks dependency licenses.
+  my-prefix:lint:all              Runs all linting checks.
+  my-prefix:lint:fix              Auto-fixes coding standards issues, if possible.
+  my-prefix:lint:pds              Validates project compliance with pds/skeleton.
+  my-prefix:lint:style            Checks for coding standards issues.
+  my-prefix:lint:syntax           Checks for syntax errors.
+  my-prefix:test:all              Runs linting, static analysis, and unit tests.
+  my-prefix:test:coverage:ci      Runs unit tests and generates CI coverage reports.
+  my-prefix:test:coverage:html    Runs unit tests and generates HTML coverage report.
+  my-prefix:test:unit             Runs unit tests.
 ```
 
 You can also list commands by command prefix with `composer list my-prefix`.
@@ -117,7 +124,7 @@ a custom Composer command, you can do here because they're the same thing.
         "ramsey/devtools": {
             "command-prefix": "my-prefix",
             "commands": {
-                "lint": {
+                "lint:all": {
                     "script": "@mylint"
                 },
                 "test:all": {
@@ -136,9 +143,9 @@ a custom Composer command, you can do here because they're the same thing.
 }
 ```
 
-In this way, when you run `composer lint` or `composer test:all`, it will
-execute the default behavior first and then run your additional commands. To
-override the default behavior so that it doesn't run at all and only your
+In this way, when you run `composer my-prefix:lint:all` or `composer my-prefix:test:all`,
+it will  execute the default behavior first and then run your additional commands.
+To  override the default behavior so that it doesn't run at all and only your
 scripts run, specify the `override` property and set it to `true`.
 
 ``` json
@@ -146,7 +153,7 @@ scripts run, specify the `override` property and set it to `true`.
     "extra": {
         "ramsey/devtools": {
             "commands": {
-                "lint": {
+                "lint:all": {
                     "override": true,
                     "script": "parallel-lint src tests"
                 }
@@ -189,8 +196,15 @@ composer my-prefix:[TAB][TAB]
 Contributions are welcome! To contribute, please familiarize yourself with
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Coordinated Disclosure
+
+Keeping user information safe and secure is a top priority, and we welcome the
+contribution of external security researchers. If you believe you've found a
+security issue in software that is maintained in this repository, please read
+[SECURITY.md](SECURITY.md) for instructions on submitting a vulnerability report.
+
 ## Copyright and License
 
 The ramsey/devtools library is copyright © [Ben Ramsey](https://benramsey.com)
-and licensed for use under the terms of the
-MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
+and licensed for use under the MIT License (MIT). Please see [LICENSE](LICENSE)
+for more information.
