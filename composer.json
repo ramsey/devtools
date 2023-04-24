@@ -1,13 +1,13 @@
 {
     "name": "ramsey/devtools",
-    "type": "composer-plugin",
     "description": "A Composer plugin to aid PHP library and application development.",
+    "license": "MIT",
+    "type": "composer-plugin",
     "keywords": [
         "development",
         "plugin",
         "tools"
     ],
-    "license": "MIT",
     "authors": [
         {
             "name": "Ben Ramsey",
@@ -20,7 +20,17 @@
         "composer-plugin-api": "^2",
         "ramsey/devtools-lib": "^1.2.2"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "config": {
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ramsey/composer-repl": true,
+            "phpstan/extension-installer": true,
+            "ergebnis/composer-normalize": true,
+            "captainhook/plugin-composer": true
+        },
         "sort-packages": true
     },
     "extra": {
@@ -31,7 +41,5 @@
         "ramsey/conventional-commits": {
             "configFile": "conventional-commits.json"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
