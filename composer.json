@@ -16,9 +16,9 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8",
+        "php": "^8.1",
         "composer-plugin-api": "^2",
-        "ramsey/devtools-lib": "^1.2.2"
+        "ramsey/devtools-lib": "^2.0@dev"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -33,6 +33,12 @@
         },
         "sort-packages": true
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../devtools-lib"
+        }
+    ],
     "extra": {
         "captainhook": {
             "force-install": true
