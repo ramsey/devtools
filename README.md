@@ -163,34 +163,6 @@ scripts run, specify the `override` property and set it to `true`.
 }
 ```
 
-### Composer Command Autocompletion
-
-Did you know you can set up your terminal to do Composer command autocompletion?
-
-If you'd like to have Composer command autocompletion, you may use
-[bamarni/symfony-console-autocomplete](https://github.com/bamarni/symfony-console-autocomplete).
-Install it globally with Composer:
-
-``` bash
-composer global require bamarni/symfony-console-autocomplete
-```
-
-Then, in your shell configuration file — usually `~/.bash_profile` or `~/.zshrc`,
-but it could be different depending on your settings — ensure that your global
-Composer `bin` directory is in your `PATH`, and evaluate the
-`symfony-autocomplete` command. This will look like this:
-
-``` bash
-export PATH="$(composer config home)/vendor/bin:$PATH"
-eval "$(symfony-autocomplete)"
-```
-
-Now, you can use the `tab` key to auto-complete Composer commands:
-
-``` bash
-composer my-prefix:[TAB][TAB]
-```
-
 ## Contributing
 
 Contributions are welcome! To contribute, please familiarize yourself with
